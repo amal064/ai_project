@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travelling Salesman</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        /* General styling for the body */
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #f7f9fc;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        /* Customizing the canvas */
+        canvas {
+            margin-top: 20px;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+        }
+
+        /* Styling for the output textarea */
+        textarea {
+            width: 100%;
+            max-width: 800px;
+            height: 120px;
+            margin-top: 20px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            resize: none;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+
+        /* Responsive layout */
+        @media (max-width: 768px) {
+            canvas {
+                width: 100%;
+                height: auto;
+            }
+
+            textarea {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container text-center">
+        <h1>Traveling Salesman Problem</h1>
+
+        <!-- Controls Section -->
+        <div class="controls row justify-content-center p-3 bg-white shadow-sm rounded mb-4">
+            <div class="col-md-3 mb-3">
+                <label for="crossoverRate" class="form-label">Crossover Rate:</label>
+                <input type="range" class="form-range" id="crossoverRate" min="0" max="1" step="0.01" value="0.7">
+            </div>
+
+            <div class="col-md-3 mb-3">
+                <label for="mutationRate" class="form-label">Mutation Rate:</label>
+                <input type="range" class="form-range" id="mutationRate" min="0" max="1" step="0.01" value="0.1">
+            </div>
+
+            <div class="col-md-3 mb-3">
+                <label for="maxGenerations" class="form-label">Max Generations:</label>
+                <input type="number" class="form-control" id="maxGenerations" min="1" value="500">
+            </div>
+
+            <div class="col-md-3 mb-3">
+                <label for="animationRate" class="form-label">Animation Delay (ms):</label>
+                <input type="number" class="form-control" id="animationRate" min="1" value="100">
+            </div>
+        </div>
+
+        <!-- Buttons Section -->
+        <div class="mb-4">
+            <button id="startButton" class="btn btn-primary me-2">Start Evolution</button>
+            <button id="pauseButton" class="btn btn-secondary" disabled>Pause Evolution</button>
+        </div>
+
+        <!-- Canvas Section -->
+        <canvas id="canvas" class="w-100" width="800" height="400"></canvas>
+
+        <!-- Output Section -->
+        <label for="output" class="form-label mt-3">Output:</label>
+        <textarea id="output" class="form-control" readonly></textarea>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

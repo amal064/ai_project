@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Knapsack Problem using Genetic Algorithm</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        input[type="number"],
+        input[type="range"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        .slider-value {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 200px;
+            padding: 10px;
+            box-sizing: border-box;
+            resize: none;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        #output {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>0/1 Knapsack Problem using Genetic Algorithm</h1>
+
+        <label for="maxWeight">Enter Maximum Knapsack Weight:</label>
+        <input type="number" id="maxWeight" min="1" value="15" required>
+
+        <label for="itemCount">Enter Number of Items:</label>
+        <input type="number" id="itemCount" min="1" value="10" required>
+
+        <label for="mutationRate">Select Mutation Rate (0.0 - 1.0):</label>
+        <input type="range" id="mutationRate" step="0.01" min="0" max="1" value="0.1">
+        <div class="slider-value" id="mutationRateValue">Mutation Rate: 0.10</div>
+
+        <label for="crossoverRate">Select Crossover Rate (0.0 - 1.0):</label>
+        <input type="range" id="crossoverRate" step="0.01" min="0" max="1" value="0.8">
+        <div class="slider-value" id="crossoverRateValue">Crossover Rate: 0.80</div>
+
+        <label for="maxGenerations">Select Maximum Number of Generations:</label>
+        <input type="range" id="maxGenerations" step="1" min="10" max="500" value="100">
+        <div class="slider-value" id="maxGenerationsValue">Max Generations: 100</div>
+
+        <button id="startButton">Start Genetic Algorithm</button>
+
+        <textarea id="output" readonly></textarea>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
