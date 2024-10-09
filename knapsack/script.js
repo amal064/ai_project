@@ -109,39 +109,50 @@ class GeneticAlgorithm {
   }
 }
 
-// DP function to solve the 0/1 Knapsack Problem
 function solveKnapsackDP(items, maxWeight) {
   const n = items.length;
-  const dp = Array(n + 1)
+  const memo = Array(n)
     .fill(null)
-    .map(() => Array(maxWeight + 1).fill(0));
+    .map(() => Array(maxWeight + 1).fill(-1));
 
-  // Fill dp table
-  for (let i = 1; i < n + 1; i++) {
-    const item = items[i - 1];
-    for (let w = 0; w < maxWeight + 1; w++) {
-      if (item.weight <= w) {
-        dp[i][w] = Math.max(
-          dp[i - 1][w],
-          dp[i - 1][w - item.weight] + item.value
-        );
-      } else {
-        dp[i][w] = dp[i - 1][w];
+  function knapsack(i, w) {
+    if (i < 0 || w <= 0) {
+      return 0;
+    }
+
+    if (memo[i][w] !== -1) {
+      return memo[i][w];
+    }
+
+    if (items[i].weight > w) {
+      memo[i][w] = knapsack(i - 1, w);
+    } else {
+      const includeItem = knapsack(i - 1, w - items[i].weight) + items[i].value;
+      const excludeItem = knapsack(i - 1, w);
+      memo[i][w] = Math.max(includeItem, excludeItem);
+    }
+
+    return memo[i][w];
+  }
+
+  function findSelectedItems(i, w) {
+    const selectedItems = [];
+    while (i >= 0 && w > 0) {
+      if (i === 0 && memo[i][w] > 0) {
+        selectedItems.push(i);
+      } else if (memo[i][w] !== memo[i - 1][w]) {
+        selectedItems.push(i);
+        w -= items[i].weight;
       }
+      i--;
     }
+    return selectedItems;
   }
 
-  // Backtrack to find the selected items
-  let w = maxWeight;
-  const selectedItems = [];
-  for (let i = n; i > 0; i--) {
-    if (dp[i][w] !== dp[i - 1][w]) {
-      selectedItems.push(i - 1); // item was selected
-      w -= items[i - 1].weight;
-    }
-  }
+  const maxValue = knapsack(n - 1, maxWeight);
+  const selectedItems = findSelectedItems(n - 1, maxWeight);
 
-  return { maxValue: dp[n][maxWeight], selectedItems };
+  return { maxValue, selectedItems };
 }
 
 document.addEventListener("DOMContentLoaded", () => {
